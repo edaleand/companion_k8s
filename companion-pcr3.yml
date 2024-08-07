@@ -55,24 +55,6 @@ spec:
         number: 80
         protocol: HTTP
 ---
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: companion-vs
-  namespace: engineering-prod
-spec:
-  gateways:
-    - companion-pcr3-gw
-  hosts:
-    - companion-pcr3.vpc3.mnw.no
-  http:
-    - name: companion-obc-pcr3
-      route:
-        - destination:
-            host: companion-pcr3-svc
-            port:
-              number: 80
----
 apiVersion: v1
 kind: Service
 metadata:
@@ -87,6 +69,24 @@ spec:
   selector:
     app: companion-pcr3
   type: ClusterIP
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: companion-pcr3-vs
+  namespace: engineering-prod
+spec:
+  gateways:
+    - companion-pcr3-gw
+  hosts:
+    - companion-pcr3.vpc3.mnw.no
+  http:
+    - name: companion-obc-pcr3
+      route:
+        - destination:
+            host: companion-pcr3-svc
+            port:
+              number: 80
 ---
 apiVersion: v1
 kind: Service
