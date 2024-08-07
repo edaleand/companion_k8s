@@ -24,11 +24,11 @@ spec:
         - containerPort: 28492
         resources:
           requests:
-            cpu: 300m
-            memory: 256m
-          limits:
             cpu: 500m
-            memory: 512Mi
+            memory: 512m
+          limits:
+            cpu: 1000m
+            memory: 1024Mi
         volumeMounts:
         - mountPath: /companion
           name: companion-volume
